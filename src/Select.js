@@ -19,6 +19,9 @@ import Creatable from './Creatable';
 import Option from './Option';
 import Value from './Value';
 
+import Ps from 'perfect-scrollbar';
+import 'perfect-scrollbar/dist/css/perfect-scrollbar.min.css';
+
 function stringifyValue (value) {
 	const valueType = typeof value;
 	if (valueType === 'string') {
@@ -203,6 +206,13 @@ const Select = React.createClass({
 	},
 
 	componentDidUpdate (prevProps, prevState) {
+    if (this.menu) {
+      if (this.menu.className.indexOf('ps-container') === -1) {
+        Ps.initialize(this.menu);
+      } else {
+        Ps.update(this.menu);
+      }
+    }
 		// focus to the selected option
 		if (this.menu && this.focused && this.state.isOpen && !this.hasScrolledToOption) {
 			let focusedOptionNode = ReactDOM.findDOMNode(this.focused);
