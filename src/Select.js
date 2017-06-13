@@ -101,6 +101,7 @@ const Select = React.createClass({
 		options: React.PropTypes.array,             // array of options
 		pageSize: React.PropTypes.number,           // number of entries to page when using page up/down keys
 		placeholder: stringOrNode,                  // field placeholder, displayed when there's no value
+		positionValue: React.PropTypes.bool,		// to show order of an option
 		required: React.PropTypes.bool,             // applies HTML5 required attribute when needed
 		resetValue: React.PropTypes.any,            // value to use when you clear the control
 		scrollMenuIntoView: React.PropTypes.bool,   // boolean to enable the viewport to shift so that the full menu fully visible when engaged
@@ -258,7 +259,7 @@ const Select = React.createClass({
 			if (!document.addEventListener && document.attachEvent) {
 				document.attachEvent('ontouchstart', this.handleTouchOutside);
 			} else {
-				document.addEventListener('touchstart', this.handleTouchOutside);				
+				document.addEventListener('touchstart', this.handleTouchOutside);
 			}
 		} else {
 			if (!document.removeEventListener && document.detachEvent) {
@@ -802,6 +803,7 @@ const Select = React.createClass({
 						onClick={onClick}
 						onRemove={this.removeValue}
 						value={value}
+						position={this.props.positionValue ? i : null}
 					>
 						{renderLabel(value, i)}
 						<span className="Select-aria-only">&nbsp;</span>
